@@ -257,7 +257,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-28 23:18:29 / Modified: 23:39:14" itemprop="dateCreated datePublished" datetime="2021-01-28T23:18:29+08:00">2021-01-28</time>
+              <time title="Created: 2021-01-28 23:18:29 / Modified: 23:44:10" itemprop="dateCreated datePublished" datetime="2021-01-28T23:18:29+08:00">2021-01-28</time>
             </span>
 
           
@@ -276,48 +276,14 @@
 <p>2） 在想要翻墙的路上找到了一个插件：Ghelper，安装成功了，网速还不错。</p>
 <p>3） Notepad++也是一个比较特别的文本编辑器，在后期修改的时候用到了。</p>
 <p>4） 所有软件和配置搞好大约花了我2个G内存；</p>
-<h2 id="遇到的坑："><a href="#遇到的坑：" class="headerlink" title="遇到的坑："></a>遇到的坑：</h2><p>【因为此时没有主题等的应用，网页啥也没有】</p>
-<p>配置好输入域名一直404</p>
-<p>解决办法（两步都要）：</p>
-<ol>
-<li><p>在创建仓库的时候一定要有readme来初始化；</p>
-</li>
-<li><p>在settings-&gt;GitHub Pages –&gt;Change theme（第一次使用是choose theme）设置后会在Code根目录生成一个_config.yml 文件，添加两个选择</p>
-</li>
-</ol>
-<p>title: Test title</p>
-<p>description:  Test description【这个第二步一般适用在直接从github的theme设置里找的theme，如果是从github其他人那里clone到的hexo主题，这个就不太必要了】</p>
-<h2 id="Git上用gitbash搭建hexo"><a href="#Git上用gitbash搭建hexo" class="headerlink" title="Git上用gitbash搭建hexo"></a>Git上用gitbash搭建hexo</h2><h4 id="1-安装hexo"><a href="#1-安装hexo" class="headerlink" title="1. 安装hexo"></a>1. 安装hexo</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i -g hexo</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-查看版本"><a href="#2-查看版本" class="headerlink" title="2. 查看版本"></a>2. 查看版本</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo -v</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-初始化hexo"><a href="#3-初始化hexo" class="headerlink" title="3. 初始化hexo"></a>3. 初始化hexo</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-试运行hexo"><a href="#4-试运行hexo" class="headerlink" title="4. 试运行hexo"></a>4. 试运行hexo</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g </span><br><span class="line"><span class="comment">// 打开localhost:4000进行访问，按ctrl+c可以关闭</span></span><br><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
-
-<h4 id="5-和我的github连接"><a href="#5-和我的github连接" class="headerlink" title="5. 和我的github连接"></a>5. 和我的github连接</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">config</span> --global user.name <span class="string">"..."</span></span><br><span class="line">$ git <span class="built_in">config</span> --global user.email <span class="string">"..."</span></span><br><span class="line"><span class="comment">// 下面的这个ssh要按几次回车，提示了生成的rsa的路径</span></span><br><span class="line">$ ssh-keygen -t rsa -C <span class="string">"刚才的邮箱"</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="6-部署"><a href="#6-部署" class="headerlink" title="6. 部署"></a>6. 部署</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在github里面的添加本地的ssh；这个Hi后面出现了自己的名字，说明部署成功了</span></span><br><span class="line">$ ssh -T git@github.com </span><br><span class="line">    </span><br><span class="line"><span class="comment">// 用notepad++打开config的配置文件，修改以下内容</span></span><br><span class="line"><span class="comment">// 将deploy的repo 修改为 github: https://github.com/Yourname/仓库.git</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">// 下载新的插件</span></span><br><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="把hexo的主题应用到我的github网页上"><a href="#把hexo的主题应用到我的github网页上" class="headerlink" title="把hexo的主题应用到我的github网页上"></a>把hexo的主题应用到我的github网页上</h2><p>首先，我觉得有点坑。</p>
-<p>参考这个网页可以获得一点帮助：</p>
-<p><a href="https://www.cnblogs.com/htext/p/12779760.html" target="_blank" rel="noopener">https://www.cnblogs.com/htext/p/12779760.html</a></p>
-<h4 id="几点经验教训："><a href="#几点经验教训：" class="headerlink" title="几点经验教训："></a>几点经验教训：</h4><ol>
-<li><p>从github上下载hexo的主题，可以选择直接下载压缩包然后手动放到Blog-themes的目录下解压；也可以直接在Blog下打开git bash，用git clone，最后的结果是一样的；</p>
-</li>
-<li><p>如果想要换主题，几乎每次都要按照上面网站的流程来一遍；尤其是ssh的生成，如果你的主题换了，那么你的ssh也要换，然后重新在github上新建；</p>
-</li>
-<li><p>一开始在git bash上运行hexo d，到了最后一直会因为protocol ‘https’的问题报错，导致spawn fail；这时，我先在git bash上hexo clean，hexo g，再去cmd里按照网页上的操作（可能有一些之前的操作），最后的一步hexo d是在cmd的Blog路径下执行的。 </p>
-</li>
-<li><p>而后打开github中的相应仓库并打开网站，可以发现和之前与localhost:4000预览的结果一样，说明网站搭建成功。</p>
-</li>
-</ol>
-<h2 id="推荐参考网站："><a href="#推荐参考网站：" class="headerlink" title="推荐参考网站："></a>推荐参考网站：</h2><p><a href="https://www.jianshu.com/p/ae1e0ea430d9" target="_blank" rel="noopener">https://www.jianshu.com/p/ae1e0ea430d9</a></p>
-<p><a href="https://segmentfault.com/a/1190000017986794" target="_blank" rel="noopener">https://segmentfault.com/a/1190000017986794</a></p>
-<p><a href="https://blog.csdn.net/WhiteLamp/article/details/79717313" target="_blank" rel="noopener">https://blog.csdn.net/WhiteLamp/article/details/79717313</a></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/28/newblog/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
