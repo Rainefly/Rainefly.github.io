@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="PE入门使用010 Editor; 安装时注意：Script-script repository-搜索exe-点击install；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PE手记">
+<meta property="og:url" content="http://yoursite.com/2021/01/29/PE/index.html">
+<meta property="og:site_name" content="Raine">
+<meta property="og:description" content="PE入门使用010 Editor; 安装时注意：Script-script repository-搜索exe-点击install；">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/29/yPvhAf.jpg">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/29/yPvcjA.jpg">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/29/yPv2nI.jpg">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/29/yPvRBt.jpg">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/29/yPvWHP.jpg">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/29/yPv4N8.jpg">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/29/yPvo9g.jpg">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/29/yPvT3Q.jpg">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/29/yPv54S.jpg">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/29/yPv7cj.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013bfbc15ed2.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013bfeebddda.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013bff084d1b.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013bff076fae.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013bff06928e.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013c04a80cff.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013c04b43706.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013c04a5764c.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013c04b5e1dc.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013c04a66681.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013c0d81d6c1.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013c0d846f70.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013c0d75acbe.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013c0d77159b.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013c0d77fbd2.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013c1304acaa.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013c1301aa40.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013c13032820.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013c12ff0267.jpg">
+<meta property="og:image" content="https://www.hualigs.cn/image/6013c130079be.jpg">
+<meta property="article:published_time" content="2021-01-29T07:35:51.000Z">
+<meta property="article:modified_time" content="2021-01-29T08:05:07.989Z">
+<meta property="article:author" content="RaineFly">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.ax1x.com/2021/01/29/yPvhAf.jpg">
+
+<link rel="canonical" href="http://yoursite.com/2021/01/29/PE/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>PE手记 | Raine</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Raine</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home // home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="about //about fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags  // tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="categories // categories fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive // archives fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#PE入门"><span class="nav-number">1.</span> <span class="nav-text">PE入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PE实例初探"><span class="nav-number">2.</span> <span class="nav-text">PE实例初探</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#大致了解"><span class="nav-number">2.1.</span> <span class="nav-text">大致了解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PE结构与节表"><span class="nav-number">2.2.</span> <span class="nav-text">PE结构与节表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6小结"><span class="nav-number">2.3.</span> <span class="nav-text">1-6小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips"><span class="nav-number">2.4.</span> <span class="nav-text">Tips</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配合ollydbg对RVA、RAW进行理解"><span class="nav-number">2.5.</span> <span class="nav-text">配合ollydbg对RVA、RAW进行理解</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">RaineFly</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Rainefly" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Rainefly" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/29/PE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RaineFly">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Raine">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PE手记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-29 15:35:51 / Modified: 16:05:07" itemprop="dateCreated datePublished" datetime="2021-01-29T15:35:51+08:00">2021-01-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="PE入门"><a href="#PE入门" class="headerlink" title="PE入门"></a>PE入门</h2><p>使用010 Editor;</p>
+<p>安装时注意：Script-script repository-搜索exe-点击install；</p>
+<a id="more"></a>
+
+<p><a href="https://imgchr.com/i/yPvhAf" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/29/yPvhAf.jpg" alt="yPvhAf.jpg"></a> </p>
+<h2 id="PE实例初探"><a href="#PE实例初探" class="headerlink" title="PE实例初探"></a>PE实例初探</h2><h3 id="大致了解"><a href="#大致了解" class="headerlink" title="大致了解"></a>大致了解</h3><ol>
+<li>在最上面可以看到DOS（磁盘操作系统）头部；</li>
+</ol>
+<p><a href="https://imgchr.com/i/yPvcjA" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/29/yPvcjA.jpg" alt="yPvcjA.jpg"></a> </p>
+<ol start="2">
+<li>补零区</li>
+</ol>
+<p><a href="https://imgchr.com/i/yPv2nI" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/29/yPv2nI.jpg" alt="yPv2nI.jpg"></a> </p>
+<ol start="3">
+<li>在template results中可以看到visual address</li>
+</ol>
+<p><a href="https://imgchr.com/i/yPvRBt" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/29/yPvRBt.jpg" alt="yPvRBt.jpg"></a> </p>
+<h3 id="PE结构与节表"><a href="#PE结构与节表" class="headerlink" title="PE结构与节表"></a>PE结构与节表</h3><ol>
+<li>DOS头</li>
+</ol>
+<p><a href="https://imgchr.com/i/yPvWHP" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/29/yPvWHP.jpg" alt="yPvWHP.jpg"></a> </p>
+<p>注意下面的量：</p>
+<p><a href="https://imgchr.com/i/yPv4N8" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/29/yPv4N8.jpg" alt="yPv4N8.jpg"></a> </p>
+<ol start="2">
+<li>DOS存根</li>
+</ol>
+<p><a href="https://imgchr.com/i/yPvo9g" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/29/yPvo9g.jpg" alt="yPvo9g.jpg"></a> </p>
+<p>是代码和数据的混合；</p>
+<p>这里面的数据的修改和填充不会影响程序的正常运行；</p>
+<ol start="3">
+<li>NT头</li>
+</ol>
+<p><a href="https://imgchr.com/i/yPvT3Q" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/29/yPvT3Q.jpg" alt="yPvT3Q.jpg"></a> </p>
+<p>这是签名的位置，小端序存储，即为：00 00 45 50</p>
+<p><a href="https://imgchr.com/i/yPv54S" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/29/yPv54S.jpg" alt="yPv54S.jpg"></a> </p>
+<ol start="4">
+<li>NT头的文件头</li>
+</ol>
+<p><a href="https://imgchr.com/i/yPv7cj" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/29/yPv7cj.jpg" alt="yPv7cj.jpg"></a> </p>
+<p>这个就是machine码（每个CPU都对应着唯一的machine码）</p>
+<p><img src="https://www.hualigs.cn/image/6013bfbc15ed2.jpg" alt> </p>
+<ol start="5">
+<li>NT头的可选头</li>
+</ol>
+<p>由参数optional_header可以得到其大小为224（32位下）</p>
+<p>【64位下，是240；】</p>
+<p><img src="https://www.hualigs.cn/image/6013bfeebddda.jpg" alt> </p>
+<p><img src="https://www.hualigs.cn/image/6013bff084d1b.jpg" alt> </p>
+<ol start="6">
+<li>NT头中的文件属性头</li>
+</ol>
+<p>由以下可以看出这是一个32bit的exe文件</p>
+<p><img src="https://www.hualigs.cn/image/6013bff076fae.jpg" alt> </p>
+<h3 id="1-6小结"><a href="#1-6小结" class="headerlink" title="1-6小结"></a>1-6小结</h3><p>DOS头、存根；</p>
+<p>大小端序；</p>
+<p>NT头；</p>
+<p>NT头-&gt;文件头；</p>
+<p>NT头-&gt;可选头；</p>
+<p>NT头-&gt;可选头-&gt;最后的DataDirectory（注意export、import、tls）</p>
+<p><img src="https://www.hualigs.cn/image/6013bff06928e.jpg" alt> </p>
+<ol start="7">
+<li>节区头</li>
+</ol>
+<p><img src="https://www.hualigs.cn/image/6013c04a80cff.jpg" alt></p>
+<p>分为不同的节区；</p>
+<p>以下是text节区的展开：</p>
+<p><img src="https://www.hualigs.cn/image/6013c04b43706.jpg" alt> </p>
+<p>VisualAddress指出了RVA的值；</p>
+<p>1） PointerToRawData指出了文件起始位置——400h；</p>
+<p><img src="https://www.hualigs.cn/image/6013c04a5764c.jpg" alt> </p>
+<p>在ollydbg中查看内存布局，00D40000是起始位置，00001000是RVA，所以VA是41000，这就是textbss的起始位置；与表中相符；而text的VA是51000。</p>
+<p><img src="https://www.hualigs.cn/image/6013c04b5e1dc.jpg" alt> </p>
+<p>再到内存进行查看：</p>
+<p>00D51000的位置的值的确是CC CC CC CC CC E9 16 3A</p>
+<p><img src="https://www.hualigs.cn/image/6013c04a66681.jpg" alt> </p>
+<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><p>【以上查看展示的是定位PE文件被加载到内存中，我们想知道某节被加载到什么位置，总结一下就是：</p>
+<ol>
+<li><p>通过PointerToRawData我们获取了文件中的数值；</p>
+</li>
+<li><p>通过VirtualAddress获取RVA值（注意是RVA值）；</p>
+</li>
+<li><p>通过调试器中的ImageBase计算VA，定位到我们想找的数据；】</p>
+</li>
+</ol>
+<p><strong>Q：为什么PointerToRawData的值是400h，而实际RVA和ImageBase看起来与这个没什么关系？</strong></p>
+<p>A：这是ASLR技术，即基址随机化，没加载到预定的ImageBase上；</p>
+<p>2） 接着看这个节区的characteristic属性：</p>
+<p><img src="https://www.hualigs.cn/image/6013c0d81d6c1.jpg" alt> </p>
+<p><img src="https://www.hualigs.cn/image/6013c0d846f70.jpg" alt> </p>
+<p>发现最后两行，读权限是1，写权限是0；</p>
+<p>即对于text节区，只可读，不可写；</p>
+<p>对比data节区的characteristic，其可读可写；</p>
+<p><img src="https://www.hualigs.cn/image/6013c0d75acbe.jpg" alt> </p>
+<p>3） Name是由编译器决定的，帮助我们更好的理解这个节区；</p>
+<p><img src="https://www.hualigs.cn/image/6013c0d77159b.jpg" alt> </p>
+<ol start="8">
+<li>RVA和RAW</li>
+</ol>
+<p>RAW：文件偏移</p>
+<p>公式：RAW - PointerToRawData = RVA - VirtualAddress</p>
+<p>如果想要知道PE中的一段数据的地址映射</p>
+<ol>
+<li><p>首先，看它的地址（最左边的那一列，即xxxx h）位于那个节区，判断的时候可以先点开一个A节区，看它的PointerToRawData是多少，再看下一个B节区，如果该数据的地址位于A节区和B节区的PointerToRawData之间，那这个数据就是在A节区的。</p>
+</li>
+<li><p>看它的地址（最左边的那一列，即xxxx h），记为m，其对应节区的PointerToRawData，记为n，其对应节区的VirtualAddress，记为p，则根据上面的公式，这个数据的RVA值为：m-n+p。</p>
+</li>
+</ol>
+<h3 id="配合ollydbg对RVA、RAW进行理解"><a href="#配合ollydbg对RVA、RAW进行理解" class="headerlink" title="配合ollydbg对RVA、RAW进行理解"></a>配合ollydbg对RVA、RAW进行理解</h3><p>1) 以entry point为例</p>
+<ol>
+<li>按F9运行，进入系统设置的entry point；</li>
+</ol>
+<p><img src="https://www.hualigs.cn/image/6013c0d77fbd2.jpg" alt> </p>
+<p>这一步，PE文件已经完成装载；</p>
+<ol start="2">
+<li>查看010</li>
+</ol>
+<p>在NT头中，可以看到入口地址的RVA是1134D</p>
+<p><img src="https://www.hualigs.cn/image/6013c1304acaa.jpg" alt></p>
+<p>在ollydbg的内存布局里可以查看，程序载入点的imagebase是00D40000，和上面那个RVA相加得，VA是5134D，和第一步的符合。</p>
+<p><img src="https://www.hualigs.cn/image/6013c1301aa40.jpg" alt> </p>
+<p>2） 以节区data中的某数据为例</p>
+<p><img src="https://www.hualigs.cn/image/6013c13032820.jpg" alt> </p>
+<p>按快捷键：ctrl+g进入地址跳转框，输入7e00，查看地址</p>
+<p><img src="https://www.hualigs.cn/image/6013c12ff0267.jpg" alt> </p>
+<p>以800h上的数据为例，</p>
+<p><img src="https://www.hualigs.cn/image/6013c130079be.jpg" alt> </p>
+<p>其RVA：（8000h-7e00h）+ 1a000h = 1a200h</p>
+<p>VA = 1a200h + imagebase = 1a200h + 40000h = 5a200h</p>
+<p>最后，进入ollydbg ，快捷键：ctrl+g，输入5a200进行查看；</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/29/debug/" rel="prev" title="三种脱壳方法&条件断点">
+      <i class="fa fa-chevron-left"></i> 三种脱壳方法&条件断点
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">rainefly</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
