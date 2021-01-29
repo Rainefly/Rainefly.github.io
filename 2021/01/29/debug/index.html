@@ -29,11 +29,11 @@
 <meta property="og:site_name" content="Raine">
 <meta property="og:description" content="脱壳利用ollydbg实现脱壳定律对于文件pe32_upx，先用ida和ollydbg各自打开（先对ollydbg进行路径修复）">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="file:///C:%5CUsers%5Cuser%5CAppData%5CLocal%5CTemp%5Cksohtml10004%5Cwps1.jpg">
-<meta property="og:image" content="file:///C:%5CUsers%5Cuser%5CAppData%5CLocal%5CTemp%5Cksohtml10004%5Cwps2.jpg">
-<meta property="og:image" content="file:///C:%5CUsers%5Cuser%5CAppData%5CLocal%5CTemp%5Cksohtml10004%5Cwps3.jpg">
-<meta property="og:image" content="file:///C:%5CUsers%5Cuser%5CAppData%5CLocal%5CTemp%5Cksohtml10004%5Cwps4.jpg">
-<meta property="og:image" content="file:///C:%5CUsers%5Cuser%5CAppData%5CLocal%5CTemp%5Cksohtml10004%5Cwps5.jpg">
+<meta property="og:image" content="http://yoursite.com/2021/01/29/debug/debug/wps1.jpg">
+<meta property="og:image" content="http://yoursite.com/2021/01/29/debug/debug/wps2.jpg">
+<meta property="og:image" content="http://yoursite.com/2021/01/29/debug/debug/wps3.jpg">
+<meta property="og:image" content="http://yoursite.com/2021/01/29/debug/debug/wps4.jpg">
+<meta property="og:image" content="http://yoursite.com/2021/01/29/debug/debug/wps5.jpg">
 <meta property="og:image" content="file:///C:%5CUsers%5Cuser%5CAppData%5CLocal%5CTemp%5Cksohtml10004%5Cwps6.jpg">
 <meta property="og:image" content="file:///C:%5CUsers%5Cuser%5CAppData%5CLocal%5CTemp%5Cksohtml10004%5Cwps7.jpg">
 <meta property="og:image" content="file:///C:%5CUsers%5Cuser%5CAppData%5CLocal%5CTemp%5Cksohtml10004%5Cwps8.jpg">
@@ -48,11 +48,11 @@
 <meta property="og:image" content="file:///C:%5CUsers%5Cuser%5CAppData%5CLocal%5CTemp%5Cksohtml10004%5Cwps17.jpg">
 <meta property="og:image" content="file:///C:%5CUsers%5Cuser%5CAppData%5CLocal%5CTemp%5Cksohtml10004%5Cwps18.jpg">
 <meta property="article:published_time" content="2021-01-29T06:35:02.000Z">
-<meta property="article:modified_time" content="2021-01-29T06:41:21.251Z">
+<meta property="article:modified_time" content="2021-01-29T07:00:21.043Z">
 <meta property="article:author" content="RaineFly">
 <meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="file:///C:%5CUsers%5Cuser%5CAppData%5CLocal%5CTemp%5Cksohtml10004%5Cwps1.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2021/01/29/debug/debug/wps1.jpg">
 
 <link rel="canonical" href="http://yoursite.com/2021/01/29/debug/">
 
@@ -287,7 +287,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-29 14:35:02 / Modified: 14:41:21" itemprop="dateCreated datePublished" datetime="2021-01-29T14:35:02+08:00">2021-01-29</time>
+              <time title="Created: 2021-01-29 14:35:02 / Modified: 15:00:21" itemprop="dateCreated datePublished" datetime="2021-01-29T14:35:02+08:00">2021-01-29</time>
             </span>
 
           
@@ -305,14 +305,14 @@
 <a id="more"></a>
 
 <p>先在obg中发现下图的地址：412B28</p>
-<p><img src="file:///C:%5CUsers%5Cuser%5CAppData%5CLocal%5CTemp%5Cksohtml10004%5Cwps1.jpg" alt="img"> </p>
+<p><img src="debug/wps1.jpg" alt="img"> </p>
 <p>然后去到ida中进行查看</p>
-<p><img src="file:///C:%5CUsers%5Cuser%5CAppData%5CLocal%5CTemp%5Cksohtml10004%5Cwps2.jpg" alt="img"> </p>
+<p><img src="debug/wps2.jpg" alt="img"> </p>
 <p>发现Tls先于start函数运行，查看start函数的入口地址：412980，所以在412980处下断点</p>
-<p><img src="file:///C:%5CUsers%5Cuser%5CAppData%5CLocal%5CTemp%5Cksohtml10004%5Cwps3.jpg" alt="img"> </p>
+<p><img src="debug/wps3.jpg" alt="img"> </p>
 <p>在obg中按ctrl+g可以实现地址跳转</p>
-<p><img src="file:///C:%5CUsers%5Cuser%5CAppData%5CLocal%5CTemp%5Cksohtml10004%5Cwps4.jpg" alt="img"> </p>
-<p><img src="file:///C:%5CUsers%5Cuser%5CAppData%5CLocal%5CTemp%5Cksohtml10004%5Cwps5.jpg" alt="img"> </p>
+<p><img src="debug/wps4.jpg" alt="img"> </p>
+<p><img src="debug/wps5.jpg" alt="img"> </p>
 <p>按f8后，ESP的地址被修改了，将寄存器的地址保存到了栈上</p>
 <p><img src="file:///C:%5CUsers%5Cuser%5CAppData%5CLocal%5CTemp%5Cksohtml10004%5Cwps6.jpg" alt="img"> </p>
 <p>在ESP上下硬件断点，因为完成了脱壳的所有操作后，程序肯定会回到61FF54这个位置并将之前的ad弹出；</p>
