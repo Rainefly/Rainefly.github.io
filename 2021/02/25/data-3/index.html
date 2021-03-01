@@ -30,7 +30,7 @@
 <meta property="og:description" content="跳表在一个有序的原始链表上，将每两个结点提取一个结点到上一级，这个抽出来的那一级叫做索引或索引层。依次类推，直至建立多级链表。这样的多级链表就是跳表。 这里不一定是每两个结点一提，较为常用的是三个结点建立一次索引。(当然也可以更多) 通过这样的索引结构，查找的效率是O(logn)，而对于空间的额外消耗，也就是个等比数列求和的计算，从空间换时间的角度来看，空间的损失并不大。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-02-25T03:48:33.000Z">
-<meta property="article:modified_time" content="2021-02-25T15:30:24.558Z">
+<meta property="article:modified_time" content="2021-03-01T07:38:55.337Z">
 <meta property="article:author" content="RaineFly">
 <meta property="article:tag" content="Data_Structure">
 <meta name="twitter:card" content="summary">
@@ -181,7 +181,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#跳表"><span class="nav-number">1.</span> <span class="nav-text">跳表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#插入"><span class="nav-number">1.1.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除"><span class="nav-number">1.2.</span> <span class="nav-text">删除</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#跳表"><span class="nav-number">1.</span> <span class="nav-text">跳表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#插入"><span class="nav-number">1.1.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除"><span class="nav-number">1.2.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#按照区间查找数据"><span class="nav-number">1.3.</span> <span class="nav-text">按照区间查找数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#散列表"><span class="nav-number">2.</span> <span class="nav-text">散列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#散列函数"><span class="nav-number">2.1.</span> <span class="nav-text">散列函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#散列冲突"><span class="nav-number">2.2.</span> <span class="nav-text">散列冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#开放寻址法"><span class="nav-number">2.2.1.</span> <span class="nav-text">开放寻址法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#线性探测"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">线性探测</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#二次探测"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">二次探测</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#线性散列"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">线性散列</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#装载因子"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">装载因子</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#优缺点"><span class="nav-number">2.2.1.5.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#链表法"><span class="nav-number">2.2.2.</span> <span class="nav-text">链表法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#优化"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">优化</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#优缺点-1"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">优缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#散列表的特性"><span class="nav-number">2.3.</span> <span class="nav-text">散列表的特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计散列表"><span class="nav-number">2.4.</span> <span class="nav-text">设计散列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用"><span class="nav-number">2.5.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#散列表与链表的结合使用——LRU缓存淘汰算法"><span class="nav-number">2.6.</span> <span class="nav-text">散列表与链表的结合使用——LRU缓存淘汰算法</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -266,10 +266,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-02-25 11:48:33 / Modified: 23:30:24" itemprop="dateCreated datePublished" datetime="2021-02-25T11:48:33+08:00">2021-02-25</time>
+              <time title="Created: 2021-02-25 11:48:33" itemprop="dateCreated datePublished" datetime="2021-02-25T11:48:33+08:00">2021-02-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-01 15:38:55" itemprop="dateModified" datetime="2021-03-01T15:38:55+08:00">2021-03-01</time>
+              </span>
 
           
 
@@ -291,6 +297,51 @@
 <p>但是，当不停地往跳表中插入数据时，如果不更新索引，就有可能出现某 2 个索引结点之间数据非常多的情况。极端情况下，跳表还会退化成单链表。</p>
 <p>所以，跳表通过随机函数来维护“平衡性”。通过一个随机函数，来决定将这个结点插入到哪几级索引中，比如随机函数生成了值 K，那我们就将这个结点添加到第一级到第 K 级这 K 级索引中。随机函数的选择很有讲究，从概率上来讲，能够保证跳表的索引大小和数据大小平衡性，不至于性能过度退化。</p>
 <h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p>删除一个结点时，如果这个结点在索引中也有出现，除了要删除原始链表中的结点，还要删除索引中的。因为单链表中的删除操作需要拿到要删除结点的前驱结点，然后通过指针操作完成删除。所以在查找要删除的结点的时候，一定要获取前驱结点。当然，如果用的是双向链表，就不需要考虑这个问题了。</p>
+<h4 id="按照区间查找数据"><a href="#按照区间查找数据" class="headerlink" title="按照区间查找数据"></a>按照区间查找数据</h4><p>对于按照区间查找数据这个操作，跳表可以做到 O(logn) 的时间复杂度定位区间的起点，然后在原始链表中顺序往后遍历就可以了。</p>
+<h3 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a>散列表</h3><p>散列表用的就是数组支持按照下标随机访问的时候，时间复杂度是 O(1) 的特性。通过散列函数把元素的键值映射为下标，然后将数据存储在数组中对应下标的位置。当按照键值查询元素时，就可hi用同样的散列函数，将键值转化数组下标，从对应的数组下标的位置取数据。</p>
+<h4 id="散列函数"><a href="#散列函数" class="headerlink" title="散列函数"></a>散列函数</h4><ol>
+<li>散列函数计算得到的散列值是一个非负整数；</li>
+<li>如果 key1 = key2，那 hash(key1) == hash(key2)；</li>
+<li>如果 key1 ≠ key2，那 hash(key1) ≠ hash(key2)。</li>
+</ol>
+<h4 id="散列冲突"><a href="#散列冲突" class="headerlink" title="散列冲突"></a>散列冲突</h4><p>Java 中 LinkedHashMap 就采用了链表法解决冲突，ThreadLocalMap 是通过线性探测的开放寻址法来解决冲突。</p>
+<h5 id="开放寻址法"><a href="#开放寻址法" class="headerlink" title="开放寻址法"></a>开放寻址法</h5><h6 id="线性探测"><a href="#线性探测" class="headerlink" title="线性探测"></a>线性探测</h6><p>插入：当我们往散列表中插入数据时，如果某个数据经过散列函数散列之后，存储位置已经被占用了，我们就从当前位置开始，依次往后查找，看是否有空闲位置，直到找到为止。</p>
+<p>查找：在散列表中查找元素的过程有点儿类似插入过程。我们通过散列函数求出要查找元素的键值对应的散列值，然后比较数组中下标为散列值的元素和要查找的元素。如果相等，则说明就是我们要找的元素；否则就顺序往后依次查找。如果遍历到数组中的空闲位置，还没有找到，就说明要查找的元素并没有在散列表中。</p>
+<p>删除：可以将删除的元素，特殊标记为 deleted。当线性探测查找的时候，遇到标记为 deleted 的空间，并不是停下来，而是继续往下探测。</p>
+<p>线性探测法其实存在很大问题。当散列表中插入的数据越来越多时，散列冲突发生的可能性就会越来越大，空闲位置会越来越少，线性探测的时间就会越来越久。极端情况下，可能需要探测整个散列表，所以最坏情况下的时间复杂度为 O(n)。同理，在删除和查找时，也有可能会线性探测整张散列表，才能找到要查找或者删除的数据。</p>
+<h6 id="二次探测"><a href="#二次探测" class="headerlink" title="二次探测"></a>二次探测</h6><p>跟线性探测很像，线性探测每次探测的步长是 1，那它探测的下标序列就是 hash(key)+0，hash(key)+1，hash(key)+2……而二次探测探测的步长就变成了原来的“二次方”，也就是说，它探测的下标序列就是 hash(key)+0，hash(key)+1^2，hash(key)+2^2……</p>
+<h6 id="线性散列"><a href="#线性散列" class="headerlink" title="线性散列"></a>线性散列</h6><p>不仅要使用一个散列函数。我们使用一组散列函数 hash1(key)，hash2(key)，hash3(key)……我们先用第一个散列函数，如果计算得到的存储位置已经被占用，再用第二个散列函数，依次类推，直到找到空闲的存储位置。</p>
+<h6 id="装载因子"><a href="#装载因子" class="headerlink" title="装载因子"></a>装载因子</h6><p>散列表的装载因子=填入表中的元素个数/散列表的长度</p>
+<p>装载因子越大，说明空闲位置越少，冲突越多，散列表的性能会下降。</p>
+<h6 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h6><p><strong>优点：</strong>散列表中的数据都存储在数组中，可以有效地利用 CPU 缓存加快查询速度。而且，这种方法实现的散列表，序列化起来比较简单。</p>
+<p><strong>缺点：</strong>用开放寻址法解决冲突的散列表，删除数据的时候比较麻烦，需要特殊标记已经删除掉的数据。而且，在开放寻址法中，所有的数据都存储在一个数组中，比起链表法来说，冲突的代价更高。所以，使用开放寻址法解决冲突的散列表，装载因子的上限不能太大。这也导致这种方法比链表法更浪费内存空间。</p>
+<p><strong>小结：</strong>当数据量比较小、装载因子小的时候，适合采用开放寻址法。</p>
+<h5 id="链表法"><a href="#链表法" class="headerlink" title="链表法"></a>链表法</h5><p>在散列表中，每个“桶（bucket）”或者“槽（slot）”会对应一条链表，所有散列值相同的元素我们都放到相同槽位对应的链表中。</p>
+<p>当插入的时候，我们只需要通过散列函数计算出对应的散列槽位，将其插入到对应链表中即可，所以插入的时间复杂度是 O(1)。当查找、删除一个元素时，我们同样通过散列函数计算出对应的槽，然后遍历链表查找或者删除。</p>
+<p>查找和删除这两个操作的时间复杂度跟链表的长度 k 成正比，也就是 O(k)。对于散列比较均匀的散列函数来说，理论上讲，k=n/m，其中 n 表示散列中数据的个数，m 表示散列表中“槽”的个数。</p>
+<h6 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h6><p>将链表法中的链表改造为其他高效的动态数据结构，比如跳表、红黑树。这样，即便出现散列冲突，极端情况下，所有的数据都散列到同一个桶内，那最终退化成的散列表的查找时间也只不过是 O(logn)。</p>
+<h6 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h6><p><strong>优点：</strong>链表法对内存的利用率比开放寻址法要高，对大装载因子得容忍度也更高。</p>
+<p><strong>缺点：</strong>链表因为要存储指针，所以对于比较小的对象的存储，是比较消耗内存的，还有可能会让内存的消耗翻倍。而且，因为链表中的结点是零散分布在内存中的，不是连续的，所以对 CPU 缓存不友好。</p>
+<p><strong>小结：</strong>基于链表的散列冲突处理方法比较适合存储大对象、大数据量的散列表，而且，比起开放寻址法，它更加灵活，支持更多的优化策略，比如用红黑树代替链表。</p>
+<h4 id="散列表的特性"><a href="#散列表的特性" class="headerlink" title="散列表的特性"></a>散列表的特性</h4><ol>
+<li>支持快速地查询、插入、删除操作；</li>
+<li>内存占用合理，不能浪费过多的内存空间；</li>
+<li>性能稳定，极端情况下，散列表的性能也不会退化到无法接受的情况。</li>
+</ol>
+<h4 id="设计散列表"><a href="#设计散列表" class="headerlink" title="设计散列表"></a>设计散列表</h4><ol>
+<li>设计一个合适的散列函数；</li>
+<li>定义装载因子阈值，并且设计动态扩容策略；</li>
+<li>选择合适的散列冲突解决方法。</li>
+</ol>
+<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><p>Q：有两个字符串数组，每个数组大约有 10 万条字符串，如何快速找出两个数组中相同的字符串？</p>
+<p>A：以第一个字符串数组构建散列表，key 为字符串，value 为出现次数。再遍历第二个字符串数组，以字符串为 key 在散列表中查找，如果 value 大于零，说明存在相同字符串。时间复杂度 O(N)。</p>
+<h4 id="散列表与链表的结合使用——LRU缓存淘汰算法"><a href="#散列表与链表的结合使用——LRU缓存淘汰算法" class="headerlink" title="散列表与链表的结合使用——LRU缓存淘汰算法"></a>散列表与链表的结合使用——LRU缓存淘汰算法</h4><p>如果需要维护一个按照访问时间从大到小有序排列的链表结构。因为缓存大小有限，当缓存空间不够，需要淘汰一个数据的时候，我们就直接将链表头部的结点删除。</p>
+<p>当要缓存某个数据的时候，先在链表中查找这个数据。如果没有找到，则直接将数据放到链表的尾部；如果找到了，我们就把它移动到链表的尾部。因为查找数据需要遍历链表，所以单纯用链表实现的 LRU 缓存淘汰算法的时间复杂很高，是 O(n)。</p>
+<p>我们使用双向链表存储数据，链表中的每个结点处理存储数据（data）、前驱指针（prev）、后继指针（next）之外，还新增了一个特殊的字段 hnext。因为散列表是通过链表法解决散列冲突的，所以每个结点会在两条链中。一个链是刚刚我们提到的双向链表，另一个链是散列表中的拉链。前驱和后继指针是为了将结点串在双向链表中，hnext 指针是为了将结点串在散列表的拉链中。</p>
+<p><strong>查找：</strong>散列表中查找数据的时间复杂度接近 O(1)，所以通过散列表，可以很快地在缓存中找到一个数据。当找到数据之后，还需要将它移动到双向链表的尾部。</p>
+<p><strong>删除：</strong>借助散列表，可以在 O(1) 时间复杂度里找到要删除的结点。因为此时的链表是双向链表，双向链表可以通过前驱指针 O(1) 时间复杂度获取前驱结点，所以在双向链表中，删除结点只需要 O(1) 的时间复杂度。</p>
+<p><strong>插入：</strong>添加数据到缓存稍微有点麻烦，需要先看这个数据是否已经在缓存中。如果已经在其中，需要将其移动到双向链表的尾部；如果不在其中，还要看缓存有没有满。如果满了，则将双向链表头部的结点删除，然后再将数据放到链表的尾部；如果没有满，就直接将数据放到链表的尾部。</p>
+<p>注：参考极客·王争老师的讲解。侵删。</p>
 
     </div>
 
