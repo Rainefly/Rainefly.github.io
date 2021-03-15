@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="动态规划（3）应用实例——量化两个字符串的相似度在量化两个字符串的相似度方面，有一个非常著名的量化方法，那就是编辑距离（Edit Distance）。 顾名思义，编辑距离指的就是，将一个字符串转化成另一个字符串，需要的最少编辑操作次数（比如增加一个字符、删除一个字符、替换一个字符）。编辑距离越大，说明两个字符串的相似程度越小；相反，编辑距离就越小，说明两个字符串的相似程度越大。对于两个完全相同的字">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Algorithm(10)——动态规划（3）">
+<meta property="og:url" content="http://yoursite.com/2021/03/15/algo-10/index.html">
+<meta property="og:site_name" content="Raine">
+<meta property="og:description" content="动态规划（3）应用实例——量化两个字符串的相似度在量化两个字符串的相似度方面，有一个非常著名的量化方法，那就是编辑距离（Edit Distance）。 顾名思义，编辑距离指的就是，将一个字符串转化成另一个字符串，需要的最少编辑操作次数（比如增加一个字符、删除一个字符、替换一个字符）。编辑距离越大，说明两个字符串的相似程度越小；相反，编辑距离就越小，说明两个字符串的相似程度越大。对于两个完全相同的字">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-15T02:49:22.000Z">
+<meta property="article:modified_time" content="2021-03-15T03:14:39.929Z">
+<meta property="article:author" content="RaineFly">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2021/03/15/algo-10/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Algorithm(10)——动态规划（3） | Raine</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Raine</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home // home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="about //about fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags  // tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="categories // categories fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive // archives fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态规划（3）"><span class="nav-number">1.</span> <span class="nav-text">动态规划（3）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#应用实例——量化两个字符串的相似度"><span class="nav-number">1.1.</span> <span class="nav-text">应用实例——量化两个字符串的相似度</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#计算莱文斯坦距离"><span class="nav-number">1.1.1.</span> <span class="nav-text">计算莱文斯坦距离</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#计算最长公共子串长度"><span class="nav-number">1.1.2.</span> <span class="nav-text">计算最长公共子串长度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实际应用场景（浏览器的纠错功能等）的代码优化"><span class="nav-number">1.1.3.</span> <span class="nav-text">实际应用场景（浏览器的纠错功能等）的代码优化</span></a></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">RaineFly</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Rainefly" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Rainefly" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/15/algo-10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RaineFly">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Raine">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Algorithm(10)——动态规划（3）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-03-15 10:49:22 / Modified: 11:14:39" itemprop="dateCreated datePublished" datetime="2021-03-15T10:49:22+08:00">2021-03-15</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="动态规划（3）"><a href="#动态规划（3）" class="headerlink" title="动态规划（3）"></a>动态规划（3）</h3><h4 id="应用实例——量化两个字符串的相似度"><a href="#应用实例——量化两个字符串的相似度" class="headerlink" title="应用实例——量化两个字符串的相似度"></a>应用实例——量化两个字符串的相似度</h4><p>在量化两个字符串的相似度方面，有一个非常著名的量化方法，那就是编辑距离（Edit Distance）。</p>
+<p>顾名思义，编辑距离指的就是，将一个字符串转化成另一个字符串，需要的最少编辑操作次数（比如增加一个字符、删除一个字符、替换一个字符）。编辑距离越大，说明两个字符串的相似程度越小；相反，编辑距离就越小，说明两个字符串的相似程度越大。对于两个完全相同的字符串来说，编辑距离就是 0。</p>
+<a id="more"></a>
+
+<p>根据所包含的编辑操作种类的不同，编辑距离有多种不同的计算方式，比较著名的有莱文斯坦距离（Levenshtein distance）和最长公共子串长度（Longest common substring length）。其中，莱文斯坦距离允许增加、删除、替换字符这三个编辑操作，最长公共子串长度只允许增加、删除字符这两个编辑操作。</p>
+<p>而且，莱文斯坦距离和最长公共子串长度，从两个截然相反的角度，分析字符串的相似程度。莱文斯坦距离的大小，表示两个字符串差异的大小；而最长公共子串的大小，表示两个字符串相似程度的大小。</p>
+<p>比如，两个字符串 mitcmu 和 mtacnu 的莱文斯坦距离是 3，最长公共子串长度是 4。</p>
+<h5 id="计算莱文斯坦距离"><a href="#计算莱文斯坦距离" class="headerlink" title="计算莱文斯坦距离"></a>计算莱文斯坦距离</h5><p>这个问题是求把一个字符串变成另一个字符串，需要的最少编辑次数。整个求解过程，涉及多个决策阶段，需要依次考察一个字符串中的每个字符，跟另一个字符串中的字符是否匹配，匹配的话如何处理，不匹配的话又如何处理。所以，这个问题符合多阶段决策最优解模型。</p>
+<p>回溯是一个递归处理的过程。</p>
+<p>如果 a[i]与 b[j]匹配，递归考察 a[i+1]和 b[j+1]。</p>
+<p>如果 a[i]与 b[j]不匹配，那我们有多种处理方式可选：</p>
+<p>-&gt; 可以删除 a[i]，然后递归考察 a[i+1]和 b[j]；</p>
+<p>-&gt; 可以删除 b[j]，然后递归考察 a[i]和 b[j+1]；</p>
+<p>-&gt; 可以在 a[i]前面添加一个跟 b[j]相同的字符，然后递归考察 a[i]和 b[j+1];</p>
+<p>-&gt; 可以在 b[j]前面添加一个跟 a[i]相同的字符，然后递归考察 a[i+1]和 b[j]；</p>
+<p>-&gt; 可以将 a[i]替换成 b[j]，或者将 b[j]替换成 a[i]，然后递归考察 a[i+1]和 b[j+1]。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">char</span>[] a = <span class="string">"mitcmu"</span>.toCharArray();</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">char</span>[] b = <span class="string">"mtacnu"</span>.toCharArray();</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> n = <span class="number">6</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> m = <span class="number">6</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> minDist = Integer.MAX_VALUE; <span class="comment">// 存储结果</span></span><br><span class="line"><span class="comment">// 调用方式 lwstBT(0, 0, 0);</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">lwstBT</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> edist)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (i == n || j == m) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i &lt; n) edist += (n-i);</span><br><span class="line">    <span class="keyword">if</span> (j &lt; m) edist += (m - j);</span><br><span class="line">    <span class="keyword">if</span> (edist &lt; minDist) minDist = edist;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (a[i] == b[j]) &#123; <span class="comment">// 两个字符匹配</span></span><br><span class="line">    lwstBT(i+<span class="number">1</span>, j+<span class="number">1</span>, edist);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123; <span class="comment">// 两个字符不匹配</span></span><br><span class="line">    lwstBT(i + <span class="number">1</span>, j, edist + <span class="number">1</span>); <span class="comment">// 删除a[i]或者b[j]前添加一个字符</span></span><br><span class="line">    lwstBT(i, j + <span class="number">1</span>, edist + <span class="number">1</span>); <span class="comment">// 删除b[j]或者a[i]前添加一个字符</span></span><br><span class="line">    lwstBT(i + <span class="number">1</span>, j + <span class="number">1</span>, edist + <span class="number">1</span>); <span class="comment">// 将a[i]和b[j]替换为相同字符</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>根据回溯算法的代码实现，可以画出递归树，看是否存在重复子问题。如果存在重复子问题，那就可以考虑能否用动态规划来解决；如果不存在重复子问题，那回溯就是最好的解决方法。</p>
+<p>在递归树中，每个节点代表一个状态，状态包含三个变量 (i, j, edist)，其中，edist 表示处理到 a[i]和 b[j]时，已经执行的编辑操作的次数。在递归树中，(i, j) 两个变量重复的节点很多。对于 (i, j) 相同的节点，只需要保留 edist 最小的，继续递归处理就可以了，剩下的节点都可以舍弃。所以，状态就从 (i, j, edist) 变成了 (i, j, min_edist)，其中 min_edist 表示处理到 a[i]和 b[j]，已经执行的最少编辑次数。</p>
+<p>在这个问题中，状态 (i, j) 可能从 (i-1, j)，(i, j-1)，(i-1, j-1) 三个状态中的任意一个转移过来。</p>
+<p>因此，状态转移方程就是：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">如果：a[i]!=b[j]，那么：min_edist(i, j)就等于：</span><br><span class="line"><span class="built_in">min</span>(min_edist(i<span class="number">-1</span>,j)+<span class="number">1</span>, min_edist(i,j<span class="number">-1</span>)+<span class="number">1</span>, min_edist(i<span class="number">-1</span>,j<span class="number">-1</span>)+<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">如果：a[i]==b[j]，那么：min_edist(i, j)就等于：</span><br><span class="line"><span class="built_in">min</span>(min_edist(i<span class="number">-1</span>,j)+<span class="number">1</span>, min_edist(i,j<span class="number">-1</span>)+<span class="number">1</span>，min_edist(i<span class="number">-1</span>,j<span class="number">-1</span>))</span><br><span class="line"></span><br><span class="line">其中，<span class="built_in">min</span>表示求三数中的最小值。</span><br></pre></td></tr></table></figure>
+
+<p>此时，可以画一个按行实现的转移表，来辅助代码实现。</p>
+<p>最终的代码结果是：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lwstDP</span><span class="params">(<span class="keyword">char</span>[] a, <span class="keyword">int</span> n, <span class="keyword">char</span>[] b, <span class="keyword">int</span> m)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span>[][] minDist = <span class="keyword">new</span> <span class="keyword">int</span>[n][m];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; m; ++j) &#123; <span class="comment">// 初始化第0行:a[0..0]与b[0..j]的编辑距离</span></span><br><span class="line">    <span class="keyword">if</span> (a[<span class="number">0</span>] == b[j]) minDist[<span class="number">0</span>][j] = j;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (j != <span class="number">0</span>) minDist[<span class="number">0</span>][j] = minDist[<span class="number">0</span>][j<span class="number">-1</span>]+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> minDist[<span class="number">0</span>][j] = <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123; <span class="comment">// 初始化第0列:a[0..i]与b[0..0]的编辑距离</span></span><br><span class="line">    <span class="keyword">if</span> (a[i] == b[<span class="number">0</span>]) minDist[i][<span class="number">0</span>] = i;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (i != <span class="number">0</span>) minDist[i][<span class="number">0</span>] = minDist[i<span class="number">-1</span>][<span class="number">0</span>]+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> minDist[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123; <span class="comment">// 按行填表</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; m; ++j) &#123;</span><br><span class="line">      <span class="keyword">if</span> (a[i] == b[j]) minDist[i][j] = <span class="built_in">min</span>(</span><br><span class="line">          minDist[i<span class="number">-1</span>][j]+<span class="number">1</span>, minDist[i][j<span class="number">-1</span>]+<span class="number">1</span>, minDist[i<span class="number">-1</span>][j<span class="number">-1</span>]);</span><br><span class="line">      <span class="keyword">else</span> minDist[i][j] = <span class="built_in">min</span>(</span><br><span class="line">          minDist[i<span class="number">-1</span>][j]+<span class="number">1</span>, minDist[i][j<span class="number">-1</span>]+<span class="number">1</span>, minDist[i<span class="number">-1</span>][j<span class="number">-1</span>]+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> minDist[n<span class="number">-1</span>][m<span class="number">-1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">min</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> z)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> minv = Integer.MAX_VALUE;</span><br><span class="line">  <span class="keyword">if</span> (x &lt; minv) minv = x;</span><br><span class="line">  <span class="keyword">if</span> (y &lt; minv) minv = y;</span><br><span class="line">  <span class="keyword">if</span> (z &lt; minv) minv = z;</span><br><span class="line">  <span class="keyword">return</span> minv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="计算最长公共子串长度"><a href="#计算最长公共子串长度" class="headerlink" title="计算最长公共子串长度"></a>计算最长公共子串长度</h5><p>每个状态还是包括三个变量 (i, j, max_lcs)，max_lcs 表示 a[0…i]和 b[0…j]的最长公共子串长度。</p>
+<p>先来看回溯的处理思路。</p>
+<p>从 a[0]和 b[0]开始，依次考察两个字符串中的字符是否匹配。</p>
+<p>如果 a[i]与 b[j]互相匹配，将最大公共子串长度加一，并且继续考察 a[i+1]和 b[j+1]。</p>
+<p>如果 a[i]与 b[j]不匹配，最长公共子串长度不变，此时有两个不同的决策路线：</p>
+<p>-&gt; 删除 a[i]，或者在 b[j]前面加上一个字符 a[i]，然后继续考察 a[i+1]和 b[j]；</p>
+<p>-&gt; 删除 b[j]，或者在 a[i]前面加上一个字符 b[j]，然后继续考察 a[i]和 b[j+1]。</p>
+<p>反过来也就是说，如果要求 a[0…i]和 b[0…j]的最长公共长度 max_lcs(i, j)，只有可能通过下面三个状态转移过来：(i-1, j-1, max_lcs)，其中 max_lcs 表示 a[0…i-1]和 b[0…j-1]的最长公共子串长度；(i-1, j, max_lcs)，其中 max_lcs 表示 a[0…i-1]和 b[0…j]的最长公共子串长度；(i, j-1, max_lcs)，其中 max_lcs 表示 a[0…i]和 b[0…j-1]的最长公共子串长度。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 状态转移方程就是：</span></span><br><span class="line">如果：a[i]==b[j]，那么：max_lcs(i, j)就等于：</span><br><span class="line"><span class="built_in">max</span>(max_lcs(i<span class="number">-1</span>,j<span class="number">-1</span>)+<span class="number">1</span>, max_lcs(i<span class="number">-1</span>, j), max_lcs(i, j<span class="number">-1</span>))；</span><br><span class="line"></span><br><span class="line">如果：a[i]!=b[j]，那么：max_lcs(i, j)就等于：</span><br><span class="line"><span class="built_in">max</span>(max_lcs(i<span class="number">-1</span>,j<span class="number">-1</span>), max_lcs(i<span class="number">-1</span>, j), max_lcs(i, j<span class="number">-1</span>))；</span><br><span class="line"></span><br><span class="line">其中<span class="built_in">max</span>表示求三数中的最大值。</span><br></pre></td></tr></table></figure>
+
+<p>最终的完整代码为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lcs</span><span class="params">(<span class="keyword">char</span>[] a, <span class="keyword">int</span> n, <span class="keyword">char</span>[] b, <span class="keyword">int</span> m)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span>[][] maxlcs = <span class="keyword">new</span> <span class="keyword">int</span>[n][m];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; m; ++j) &#123;<span class="comment">//初始化第0行：a[0..0]与b[0..j]的maxlcs</span></span><br><span class="line">    <span class="keyword">if</span> (a[<span class="number">0</span>] == b[j]) maxlcs[<span class="number">0</span>][j] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (j != <span class="number">0</span>) maxlcs[<span class="number">0</span>][j] = maxlcs[<span class="number">0</span>][j<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">else</span> maxlcs[<span class="number">0</span>][j] = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;<span class="comment">//初始化第0列：a[0..i]与b[0..0]的maxlcs</span></span><br><span class="line">    <span class="keyword">if</span> (a[i] == b[<span class="number">0</span>]) maxlcs[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (i != <span class="number">0</span>) maxlcs[i][<span class="number">0</span>] = maxlcs[i<span class="number">-1</span>][<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">else</span> maxlcs[i][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123; <span class="comment">// 填表</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; m; ++j) &#123;</span><br><span class="line">      <span class="keyword">if</span> (a[i] == b[j]) maxlcs[i][j] = <span class="built_in">max</span>(</span><br><span class="line">          maxlcs[i<span class="number">-1</span>][j], maxlcs[i][j<span class="number">-1</span>], maxlcs[i<span class="number">-1</span>][j<span class="number">-1</span>]+<span class="number">1</span>);</span><br><span class="line">      <span class="keyword">else</span> maxlcs[i][j] = <span class="built_in">max</span>(</span><br><span class="line">          maxlcs[i<span class="number">-1</span>][j], maxlcs[i][j<span class="number">-1</span>], maxlcs[i<span class="number">-1</span>][j<span class="number">-1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> maxlcs[n<span class="number">-1</span>][m<span class="number">-1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> z)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> maxv = Integer.MIN_VALUE;</span><br><span class="line">  <span class="keyword">if</span> (x &gt; maxv) maxv = x;</span><br><span class="line">  <span class="keyword">if</span> (y &gt; maxv) maxv = y;</span><br><span class="line">  <span class="keyword">if</span> (z &gt; maxv) maxv = z;</span><br><span class="line">  <span class="keyword">return</span> maxv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="实际应用场景（浏览器的纠错功能等）的代码优化"><a href="#实际应用场景（浏览器的纠错功能等）的代码优化" class="headerlink" title="实际应用场景（浏览器的纠错功能等）的代码优化"></a>实际应用场景（浏览器的纠错功能等）的代码优化</h5><p>针对纠错效果不好的问题，有很多种优化思路，比如：</p>
+<ol>
+<li>不仅仅取出编辑距离最小的那个单词，而是取出编辑距离最小的 TOP 10，然后根据其他参数，决策选择哪个单词作为拼写纠错单词。</li>
+<li>使用搜索热门程度来决定哪个单词作为拼写纠错单词。</li>
+<li>可以用多种编辑距离计算方法，然后分别编辑距离最小的 TOP 10，然后求交集，用交集的结果，再继续优化处理。</li>
+<li>可以通过统计用户的搜索日志，得到最常被拼错的单词列表，以及对应的拼写正确的单词。搜索引擎在拼写纠错的时候，首先在这个最常被拼错单词列表中查找。如果一旦找到，直接返回对应的正确的单词。这样纠错的效果非常好。</li>
+<li>可以引入个性化因素。针对每个用户，维护这个用户特有的搜索喜好，也就是常用的搜索关键词。当用户输入错误的单词的时候，首先在这个用户常用的搜索关键词中，计算编辑距离，查找编辑距离最小的单词。</li>
+</ol>
+<p>针对纠错性能方面，也有相应的优化方式，比如：</p>
+<ol>
+<li>如果纠错功能的 TPS 不高，可以部署多台机器，每台机器运行一个独立的纠错功能。当有一个纠错请求的时候，通过负载均衡，分配到其中一台机器，来计算编辑距离，得到纠错单词。</li>
+<li>如果纠错系统的响应时间太长，也就是，每个纠错请求处理时间过长，可以将纠错的词库，分割到很多台机器。当有一个纠错请求的时候，就将这个拼写错误的单词，同时发送到这多台机器，让多台机器并行处理，分别得到编辑距离最小的单词，然后再比对合并，最终决定出一个最优的纠错单词。</li>
+</ol>
+<p>Q：</p>
+<ol>
+<li>有一个数字序列包含 n 个不同的数字，如何求出这个序列中的最长递增子序列长度？比如 2, 9, 3, 6, 5, 1, 7 这样一组数字序列，它的最长递增子序列就是 2, 3, 5, 7，所以最长递增子序列的长度是 4。</li>
+<li>假设有几种不同币值的硬币 v1，v2，……，vn（单位是元）。如果要支付 w 元，求最少需要多少个硬币。比如，有 3 种不同的硬币，1 元、3 元、5 元，那么要支付 9 元，最少需要 3 个硬币（3 个 3 元的硬币）。</li>
+<li>对“杨辉三角”进行改造。每个位置的数字可以随意填写，经过某个数字只能到达下面一层相邻的两个数字。假设从第一层，往下移动，把移动到最底层所经过的所有数字之和，定义为路径的长度。求出从最高层移动到最底层的最短路径长度。</li>
+</ol>
+<p>注：参考极客王争讲解。侵删。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/13/algo-9/" rel="prev" title="Algorithm(9)——动态规划（2）">
+      <i class="fa fa-chevron-left"></i> Algorithm(9)——动态规划（2）
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">rainefly</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
