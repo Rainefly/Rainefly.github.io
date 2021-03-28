@@ -29,11 +29,13 @@
 <meta property="og:site_name" content="Raine">
 <meta property="og:description" content="向量空间如何实现一个简单的音乐推荐系统？ 基本上有这样两种思路：  找到跟你口味偏好相似的用户，把他们爱听的歌曲推荐给你； 找出跟你喜爱的歌曲特征相似的歌曲，把这些歌曲推荐给你。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/03/28/sfzAV32MeZqlg7T.png">
 <meta property="article:published_time" content="2021-03-27T10:05:24.000Z">
-<meta property="article:modified_time" content="2021-03-28T02:15:54.232Z">
+<meta property="article:modified_time" content="2021-03-28T02:20:50.845Z">
 <meta property="article:author" content="RaineFly">
 <meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/03/28/sfzAV32MeZqlg7T.png">
 
 <link rel="canonical" href="http://yoursite.com/2021/03/27/algo-14/">
 
@@ -274,7 +276,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-28 10:15:54" itemprop="dateModified" datetime="2021-03-28T10:15:54+08:00">2021-03-28</time>
+                <time title="Modified: 2021-03-28 10:20:50" itemprop="dateModified" datetime="2021-03-28T10:20:50+08:00">2021-03-28</time>
               </span>
 
           
@@ -299,7 +301,9 @@
 <h4 id="基于相似用户做推荐"><a href="#基于相似用户做推荐" class="headerlink" title="基于相似用户做推荐"></a>基于相似用户做推荐</h4><p>可以遍历所有的用户，对比每个用户跟你共同喜爱的歌曲个数，并且设置一个阈值，如果你和某个用户共同喜爱的歌曲个数超过这个阈值，就把这个用户看作跟你口味相似的用户，把这个用户喜爱但你还没听过的歌曲，推荐给你。</p>
 <p>在定义用户对某首歌曲的喜爱程度方面，可以通过用户的行为来定义这个喜爱程度。给每个行为（单曲循环、分享、收藏、点赞等）定义一个得分，得分越高表示喜爱程度越高。</p>
 <p>有了分值，可以使用欧几里得距离（Euclidean distance）来表示相似度距离。欧几里得距离是用来计算两个向量之间的距离的。类比一维、二维、三维的表示方法，K 维空间中的某个位置，用向量表示就是（X1，X2，X3，…，XK）。</p>
-<p>向量的距离公式为:<br>$$<br>distance=\sqrt{\sum_{i=1}^n(x_i-y_i)^2}<br>$$<br>计算出两个向量之间的欧几里得距离，作为两个用户的口味相似程度的度量。</p>
+<p>向量的距离公式为:</p>
+<p><img src="https://i.loli.net/2021/03/28/sfzAV32MeZqlg7T.png" alt="formula.png"></p>
+<p>计算出两个向量之间的欧几里得距离，作为两个用户的口味相似程度的度量。</p>
 <h4 id="基于相似歌曲做推荐"><a href="#基于相似歌曲做推荐" class="headerlink" title="基于相似歌曲做推荐"></a>基于相似歌曲做推荐</h4><p>类似基于相似用户的推荐方法，给每个歌曲的每个特征项打一个分数，这样每个歌曲就都对应一个特征项向量。可以基于这个特征项向量，来计算两个歌曲之间的欧几里得距离。欧几里得距离越小，表示两个歌曲的相似程度越大。</p>
 <p>但这个方法需要列出足够多的音乐特征项，且需要按照特征项对歌曲进行标注，较为繁琐。</p>
 <p>因此还可以换一种思路。对于两首歌，如果喜欢听的人群都是差不多的，那侧面就可以反映出，这两首歌比较相似。也就是说，基于相似歌曲的推荐思路中，针对每个歌曲，可以将每个用户的打分作为向量。有了每个歌曲的向量表示，通过计算向量之间的欧几里得距离，来表示歌曲之间的相似度。欧几里得距离越小，表示两个歌曲越相似。</p>
