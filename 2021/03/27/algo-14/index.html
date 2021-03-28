@@ -22,15 +22,20 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Raine">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="向量空间如何实现一个简单的音乐推荐系统？ 基本上有这样两种思路：  找到跟你口味偏好相似的用户，把他们爱听的歌曲推荐给你； 找出跟你喜爱的歌曲特征相似的歌曲，把这些歌曲推荐给你。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Algorithm(14)——向量空间">
+<meta property="og:url" content="http://yoursite.com/2021/03/27/algo-14/index.html">
 <meta property="og:site_name" content="Raine">
+<meta property="og:description" content="向量空间如何实现一个简单的音乐推荐系统？ 基本上有这样两种思路：  找到跟你口味偏好相似的用户，把他们爱听的歌曲推荐给你； 找出跟你喜爱的歌曲特征相似的歌曲，把这些歌曲推荐给你。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-27T10:05:24.000Z">
+<meta property="article:modified_time" content="2021-03-28T02:15:54.232Z">
 <meta property="article:author" content="RaineFly">
+<meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/archives/">
+<link rel="canonical" href="http://yoursite.com/2021/03/27/algo-14/">
 
 
 <script class="page-configurations">
@@ -38,12 +43,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Archive | Raine</title>
+  <title>Algorithm(14)——向量空间 | Raine</title>
   
 
 
@@ -164,7 +169,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -176,6 +181,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#向量空间"><span class="nav-number">1.</span> <span class="nav-text">向量空间</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于相似用户做推荐"><span class="nav-number">1.1.</span> <span class="nav-text">基于相似用户做推荐</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于相似歌曲做推荐"><span class="nav-number">1.2.</span> <span class="nav-text">基于相似歌曲做推荐</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -231,234 +237,102 @@
       <div class="main-inner">
         
 
-        <div class="content archive">
+        <div class="content post posts-expand">
           
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">Um..! 29 posts in total. Keep on posting.</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/27/algo-14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RaineFly">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Raine">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Algorithm(14)——向量空间
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-27 18:05:24" itemprop="dateCreated datePublished" datetime="2021-03-27T18:05:24+08:00">2021-03-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-28 10:15:54" itemprop="dateModified" datetime="2021-03-28T10:15:54+08:00">2021-03-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
+        <h3 id="向量空间"><a href="#向量空间" class="headerlink" title="向量空间"></a>向量空间</h3><p>如何实现一个简单的音乐推荐系统？</p>
+<p>基本上有这样两种思路：</p>
+<ol>
+<li>找到跟你口味偏好相似的用户，把他们爱听的歌曲推荐给你；</li>
+<li>找出跟你喜爱的歌曲特征相似的歌曲，把这些歌曲推荐给你。</li>
+</ol>
+<a id="more"></a>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-03-27T18:05:24+08:00"
-              content="2021-03-27">
-          03-27
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/27/algo-14/" itemprop="url">
-            <span itemprop="name">Algorithm(14)——向量空间</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-03-27T17:32:05+08:00"
-              content="2021-03-27">
-          03-27
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/27/algo-13/" itemprop="url">
-            <span itemprop="name">Algorithm(13)——过滤算法</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-03-26T23:07:08+08:00"
-              content="2021-03-26">
-          03-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/26/data-8/" itemprop="url">
-            <span itemprop="name">Data_Structure(8)——位图</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-03-25T21:08:04+08:00"
-              content="2021-03-25">
-          03-25
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/25/charbug/" itemprop="url">
-            <span itemprop="name">Char*和char数组的坑</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-03-21T23:16:30+08:00"
-              content="2021-03-21">
-          03-21
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/21/algo-12/" itemprop="url">
-            <span itemprop="name">Algorithm(12)——最短路径算法</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-03-20T16:09:25+08:00"
-              content="2021-03-20">
-          03-20
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/20/algo-11/" itemprop="url">
-            <span itemprop="name">Algorithm(11)——拓扑排序</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-03-15T10:49:22+08:00"
-              content="2021-03-15">
-          03-15
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/15/algo-10/" itemprop="url">
-            <span itemprop="name">Algorithm(10)——动态规划（3）</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-03-13T22:07:03+08:00"
-              content="2021-03-13">
-          03-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/13/algo-9/" itemprop="url">
-            <span itemprop="name">Algorithm(9)——动态规划（2）</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-03-11T20:46:11+08:00"
-              content="2021-03-11">
-          03-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/11/VM-fault/" itemprop="url">
-            <span itemprop="name">一次与虚拟机的搏斗——联网</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-03-11T17:12:16+08:00"
-              content="2021-03-11">
-          03-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/11/algo-8/" itemprop="url">
-            <span itemprop="name">Algorithm(8)——动态规划（1）</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+<h4 id="基于相似用户做推荐"><a href="#基于相似用户做推荐" class="headerlink" title="基于相似用户做推荐"></a>基于相似用户做推荐</h4><p>可以遍历所有的用户，对比每个用户跟你共同喜爱的歌曲个数，并且设置一个阈值，如果你和某个用户共同喜爱的歌曲个数超过这个阈值，就把这个用户看作跟你口味相似的用户，把这个用户喜爱但你还没听过的歌曲，推荐给你。</p>
+<p>在定义用户对某首歌曲的喜爱程度方面，可以通过用户的行为来定义这个喜爱程度。给每个行为（单曲循环、分享、收藏、点赞等）定义一个得分，得分越高表示喜爱程度越高。</p>
+<p>有了分值，可以使用欧几里得距离（Euclidean distance）来表示相似度距离。欧几里得距离是用来计算两个向量之间的距离的。类比一维、二维、三维的表示方法，K 维空间中的某个位置，用向量表示就是（X1，X2，X3，…，XK）。</p>
+<p>向量的距离公式为:<br>$$<br>distance=\sqrt{\sum_{i=1}^n(x_i-y_i)^2}<br>$$<br>计算出两个向量之间的欧几里得距离，作为两个用户的口味相似程度的度量。</p>
+<h4 id="基于相似歌曲做推荐"><a href="#基于相似歌曲做推荐" class="headerlink" title="基于相似歌曲做推荐"></a>基于相似歌曲做推荐</h4><p>类似基于相似用户的推荐方法，给每个歌曲的每个特征项打一个分数，这样每个歌曲就都对应一个特征项向量。可以基于这个特征项向量，来计算两个歌曲之间的欧几里得距离。欧几里得距离越小，表示两个歌曲的相似程度越大。</p>
+<p>但这个方法需要列出足够多的音乐特征项，且需要按照特征项对歌曲进行标注，较为繁琐。</p>
+<p>因此还可以换一种思路。对于两首歌，如果喜欢听的人群都是差不多的，那侧面就可以反映出，这两首歌比较相似。也就是说，基于相似歌曲的推荐思路中，针对每个歌曲，可以将每个用户的打分作为向量。有了每个歌曲的向量表示，通过计算向量之间的欧几里得距离，来表示歌曲之间的相似度。欧几里得距离越小，表示两个歌曲越相似。</p>
+<p>注：参考极客王争讲解。侵删。</p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/27/algo-13/" rel="prev" title="Algorithm(13)——过滤算法">
+      <i class="fa fa-chevron-left"></i> Algorithm(13)——过滤算法
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
+  
+  
 
 
 
