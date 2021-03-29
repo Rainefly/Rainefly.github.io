@@ -22,22 +22,20 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
   </script>
 
-  <meta name="description" content="向量空间如何实现一个简单的音乐推荐系统？ 基本上有这样两种思路：  找到跟你口味偏好相似的用户，把他们爱听的歌曲推荐给你； 找出跟你喜爱的歌曲特征相似的歌曲，把这些歌曲推荐给你。">
+  <meta name="description" content="索引功能性需求格式化数据or非格式化数据要构建索引的原始数据，类型有很多。大致可以分为两类，一类是结构化数据，比如，MySQL 中的数据；另一类是非结构化数据，比如搜索引擎中网页。对于非结构化数据，一般需要做预处理，提取出查询关键词，对关键词构建索引。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Algorithm(14)——向量空间">
-<meta property="og:url" content="http://yoursite.com/2021/03/27/algo-14/index.html">
+<meta property="og:title" content="Algorithm(16)——索引">
+<meta property="og:url" content="http://yoursite.com/2021/03/29/algo-16/index.html">
 <meta property="og:site_name" content="Raine">
-<meta property="og:description" content="向量空间如何实现一个简单的音乐推荐系统？ 基本上有这样两种思路：  找到跟你口味偏好相似的用户，把他们爱听的歌曲推荐给你； 找出跟你喜爱的歌曲特征相似的歌曲，把这些歌曲推荐给你。">
+<meta property="og:description" content="索引功能性需求格式化数据or非格式化数据要构建索引的原始数据，类型有很多。大致可以分为两类，一类是结构化数据，比如，MySQL 中的数据；另一类是非结构化数据，比如搜索引擎中网页。对于非结构化数据，一般需要做预处理，提取出查询关键词，对关键词构建索引。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.loli.net/2021/03/28/sfzAV32MeZqlg7T.png">
-<meta property="article:published_time" content="2021-03-27T10:05:24.000Z">
-<meta property="article:modified_time" content="2021-03-28T02:20:50.845Z">
+<meta property="article:published_time" content="2021-03-29T01:58:08.000Z">
+<meta property="article:modified_time" content="2021-03-29T02:14:14.499Z">
 <meta property="article:author" content="RaineFly">
 <meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2021/03/28/sfzAV32MeZqlg7T.png">
 
-<link rel="canonical" href="http://yoursite.com/2021/03/27/algo-14/">
+<link rel="canonical" href="http://yoursite.com/2021/03/29/algo-16/">
 
 
 <script class="page-configurations">
@@ -50,7 +48,7 @@
   };
 </script>
 
-  <title>Algorithm(14)——向量空间 | Raine</title>
+  <title>Algorithm(16)——索引 | Raine</title>
   
 
 
@@ -183,7 +181,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#向量空间"><span class="nav-number">1.</span> <span class="nav-text">向量空间</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于相似用户做推荐"><span class="nav-number">1.1.</span> <span class="nav-text">基于相似用户做推荐</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于相似歌曲做推荐"><span class="nav-number">1.2.</span> <span class="nav-text">基于相似歌曲做推荐</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#索引"><span class="nav-number">1.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#功能性需求"><span class="nav-number">1.1.</span> <span class="nav-text">功能性需求</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#格式化数据or非格式化数据"><span class="nav-number">1.1.1.</span> <span class="nav-text">格式化数据or非格式化数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#静态数据or动态数据"><span class="nav-number">1.1.2.</span> <span class="nav-text">静态数据or动态数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#存储在内存or硬盘"><span class="nav-number">1.1.3.</span> <span class="nav-text">存储在内存or硬盘</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#单值查找or区间查找"><span class="nav-number">1.1.4.</span> <span class="nav-text">单值查找or区间查找</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#单关键词查找or多关键词组合查找"><span class="nav-number">1.1.5.</span> <span class="nav-text">单关键词查找or多关键词组合查找</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非功能性需求"><span class="nav-number">1.2.</span> <span class="nav-text">非功能性需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造索引常用的数据结构"><span class="nav-number">1.3.</span> <span class="nav-text">构造索引常用的数据结构</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -246,7 +244,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/27/algo-14/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/29/algo-16/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -259,7 +257,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Algorithm(14)——向量空间
+          Algorithm(16)——索引
         </h1>
 
         <div class="post-meta">
@@ -268,16 +266,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-03-27 18:05:24" itemprop="dateCreated datePublished" datetime="2021-03-27T18:05:24+08:00">2021-03-27</time>
+              <time title="Created: 2021-03-29 09:58:08 / Modified: 10:14:14" itemprop="dateCreated datePublished" datetime="2021-03-29T09:58:08+08:00">2021-03-29</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-28 10:20:50" itemprop="dateModified" datetime="2021-03-28T10:20:50+08:00">2021-03-28</time>
-              </span>
 
           
 
@@ -290,23 +282,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="向量空间"><a href="#向量空间" class="headerlink" title="向量空间"></a>向量空间</h3><p>如何实现一个简单的音乐推荐系统？</p>
-<p>基本上有这样两种思路：</p>
-<ol>
-<li>找到跟你口味偏好相似的用户，把他们爱听的歌曲推荐给你；</li>
-<li>找出跟你喜爱的歌曲特征相似的歌曲，把这些歌曲推荐给你。</li>
-</ol>
+        <h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><h4 id="功能性需求"><a href="#功能性需求" class="headerlink" title="功能性需求"></a>功能性需求</h4><h5 id="格式化数据or非格式化数据"><a href="#格式化数据or非格式化数据" class="headerlink" title="格式化数据or非格式化数据"></a>格式化数据or非格式化数据</h5><p>要构建索引的原始数据，类型有很多。大致可以分为两类，一类是结构化数据，比如，MySQL 中的数据；另一类是非结构化数据，比如搜索引擎中网页。对于非结构化数据，一般需要做预处理，提取出查询关键词，对关键词构建索引。</p>
 <a id="more"></a>
 
-<h4 id="基于相似用户做推荐"><a href="#基于相似用户做推荐" class="headerlink" title="基于相似用户做推荐"></a>基于相似用户做推荐</h4><p>可以遍历所有的用户，对比每个用户跟你共同喜爱的歌曲个数，并且设置一个阈值，如果你和某个用户共同喜爱的歌曲个数超过这个阈值，就把这个用户看作跟你口味相似的用户，把这个用户喜爱但你还没听过的歌曲，推荐给你。</p>
-<p>在定义用户对某首歌曲的喜爱程度方面，可以通过用户的行为来定义这个喜爱程度。给每个行为（单曲循环、分享、收藏、点赞等）定义一个得分，得分越高表示喜爱程度越高。</p>
-<p>有了分值，可以使用欧几里得距离（Euclidean distance）来表示相似度距离。欧几里得距离是用来计算两个向量之间的距离的。类比一维、二维、三维的表示方法，K 维空间中的某个位置，用向量表示就是（X1，X2，X3，…，XK）。</p>
-<p>向量的距离公式为:</p>
-<p><img src="https://i.loli.net/2021/03/28/sfzAV32MeZqlg7T.png" alt="formula.png"></p>
-<p>计算出两个向量之间的欧几里得距离，作为两个用户的口味相似程度的度量。</p>
-<h4 id="基于相似歌曲做推荐"><a href="#基于相似歌曲做推荐" class="headerlink" title="基于相似歌曲做推荐"></a>基于相似歌曲做推荐</h4><p>类似基于相似用户的推荐方法，给每个歌曲的每个特征项打一个分数，这样每个歌曲就都对应一个特征项向量。可以基于这个特征项向量，来计算两个歌曲之间的欧几里得距离。欧几里得距离越小，表示两个歌曲的相似程度越大。</p>
-<p>但这个方法需要列出足够多的音乐特征项，且需要按照特征项对歌曲进行标注，较为繁琐。</p>
-<p>因此还可以换一种思路。对于两首歌，如果喜欢听的人群都是差不多的，那侧面就可以反映出，这两首歌比较相似。也就是说，基于相似歌曲的推荐思路中，针对每个歌曲，可以将每个用户的打分作为向量。有了每个歌曲的向量表示，通过计算向量之间的欧几里得距离，来表示歌曲之间的相似度。欧几里得距离越小，表示两个歌曲越相似。</p>
+<h5 id="静态数据or动态数据"><a href="#静态数据or动态数据" class="headerlink" title="静态数据or动态数据"></a>静态数据or动态数据</h5><p>如果原始数据是一组静态数据，也就是说，不会有数据的增加、删除、更新操作，那就只要在构建索引的时候，考虑查询效率就可以了。这样，索引的构建就相对简单些。</p>
+<p>不过，大部分情况下，都是对动态数据构建索引，也就是说，不仅要考虑到索引的查询效率，在原始数据更新的同时，还需要动态地更新索引。支持动态数据集合的索引，设计起来相对也要更加复杂些。</p>
+<h5 id="存储在内存or硬盘"><a href="#存储在内存or硬盘" class="headerlink" title="存储在内存or硬盘"></a>存储在内存or硬盘</h5><p>如果索引存储在内存中，那查询的速度肯定要比存储在磁盘中的高。但是，如果原始数据量很大的情况下，对应的索引可能也会很大。这个时候，因为内存有限，可能就不得不将索引存储在磁盘中了。实际上，还有第三种情况，那就是一部分存储在内存，一部分存储在磁盘，这样就可以兼顾内存消耗和查询效率。</p>
+<h5 id="单值查找or区间查找"><a href="#单值查找or区间查找" class="headerlink" title="单值查找or区间查找"></a>单值查找or区间查找</h5><p>所谓单值查找，也就是根据查询关键词等于某个值的数据。这种查询需求最常见。所谓区间查找，就是查找关键词处于某个区间值的所有数据。</p>
+<h5 id="单关键词查找or多关键词组合查找"><a href="#单关键词查找or多关键词组合查找" class="headerlink" title="单关键词查找or多关键词组合查找"></a>单关键词查找or多关键词组合查找</h5><p>搜索引擎中构建的索引，既要支持一个关键词的查找，比如“数据结构”，也要支持组合关键词查找，比如“数据结构 &amp;&amp; 算法”。对于单关键词的查找，索引构建起来相对简单些。对于多关键词查询来说，要分多种情况。像 MySQL 这种结构化数据的查询需求，可以实现针对多个关键词的组合，建立索引；对于像搜索引擎这样的非结构数据的查询需求，可以针对单个关键词构建索引，然后通过集合操作，比如求并集、求交集等，计算出多个关键词组合的查询结果。</p>
+<h4 id="非功能性需求"><a href="#非功能性需求" class="headerlink" title="非功能性需求"></a>非功能性需求</h4><ol>
+<li>不管是存储在内存中还是磁盘中，索引对存储空间的消耗不能过大。</li>
+<li>在考虑索引查询效率的同时，还要考虑索引的维护成本。</li>
+</ol>
+<h4 id="构造索引常用的数据结构"><a href="#构造索引常用的数据结构" class="headerlink" title="构造索引常用的数据结构"></a>构造索引常用的数据结构</h4><p>实际上，常用来构建索引的数据结构，基本上就是几种支持动态数据集合的数据结构。比如，散列表、红黑树、跳表、B+ 树。除此之外，位图、布隆过滤器可以作为辅助索引，有序数组可以用来对静态数据构建索引。</p>
+<p><strong>散列表</strong>增删改查操作的性能非常好，时间复杂度是 O(1)。一些键值数据库，比如 Redis、Memcache，就是使用散列表来构建索引的。这类索引，一般都构建在内存中。</p>
+<p><strong>红黑树</strong>作为一种常用的平衡二叉查找树，数据插入、删除、查找的时间复杂度是 O(logn)，也非常适合用来构建内存索引。Ext 文件系统中，对磁盘块的索引，用的就是红黑树。</p>
+<p><strong>B+ 树</strong>比起红黑树来说，更加适合构建存储在磁盘中的索引。B+ 树是一个多叉树，所以，对相同个数的数据构建索引，B+ 树的高度要低于红黑树。当借助索引查询数据的时候，读取 B+ 树索引，需要的磁盘 IO 次数会更少。所以，大部分关系型数据库的索引，比如 MySQL、Oracle，都是用 B+ 树来实现的。</p>
+<p><strong>跳表</strong>也支持快速添加、删除、查找数据。而且，通过灵活调整索引结点个数和数据个数之间的比例，可以很好地平衡索引对内存的消耗及其查询效率。Redis 中的有序集合，就是用跳表来构建的。</p>
+<p><strong>布隆过滤器</strong>有一定的判错率，尽管对于判定存在的数据，有可能并不存在，但是对于判定不存在的数据，那肯定就不存在。而且，布隆过滤器还有一个更大的特点，那就是内存占用非常少。可以针对数据，构建一个布隆过滤器，并且存储在内存中。当要查询数据的时候，可以先通过布隆过滤器，判定是否存在。如果通过布隆过滤器判定数据不存在，那就没有必要读取磁盘中的索引了。对于数据不存在的情况，数据查询就更加快速了。</p>
+<p><strong>有序数组</strong>也可以被作为索引。如果数据是静态的，也就是不会有插入、删除、更新操作，那可以把数据的关键词（查询用的）抽取出来，组织成有序数组，然后利用二分查找算法来快速查找数据。</p>
 <p>注：参考极客王争讲解。侵删。</p>
 
     </div>
@@ -326,12 +320,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/03/27/algo-13/" rel="prev" title="Algorithm(13)——过滤算法">
-      <i class="fa fa-chevron-left"></i> Algorithm(13)——过滤算法
+    <a href="/2021/03/28/algo-15/" rel="prev" title="Algorithm(15)——搜索">
+      <i class="fa fa-chevron-left"></i> Algorithm(15)——搜索
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/03/28/data-9/" rel="next" title="Data_Structure(9)——B+树">
-      Data_Structure(9)——B+树 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/03/29/algo-17/" rel="next" title="Algorithm(17)——并行算法">
+      Algorithm(17)——并行算法 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
